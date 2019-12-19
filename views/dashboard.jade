@@ -42,11 +42,11 @@ html(lang='en')
         
       }
       .scrolling-wrapper1 {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom:10px;
+      
+        overflow-y: scroll;
+        height:500px;
+       
+        padding-bottom:3px;
         margin-top:5px;
 
         
@@ -69,10 +69,12 @@ html(lang='en')
           background-color: #212529;
           box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19)
         }
+
         .scrolling-wrapper1 .card:hover {
-          flex: 0 0 auto;
+   
           padding:30px;
           margin:4px;
+     
           color:black;
           text-decoration:none;
           background-color: whitesmoke;
@@ -210,8 +212,9 @@ html(lang='en')
                i(style='font-weight:bold;margin-bottom:10px:margin-top:30px') All Products:
               
             .scrolling-wrapper1
-              
+              .row
                 each product in products
+                 .col-4
                   a(href="/addcart/#{product.id}").card
                     h5=product.name
             
