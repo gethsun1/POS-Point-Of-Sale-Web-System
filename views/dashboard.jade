@@ -38,6 +38,7 @@ html(lang='en')
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         padding-bottom:10px;
+         overflow: hidden; 
 
         
       }
@@ -102,7 +103,7 @@ html(lang='en')
     link(href='navbar-top.css', rel='stylesheet')
   body
     nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
-      a.navbar-brand(href='#') Spare-Shop
+      a.navbar-brand(href='#') Spare-Shop -
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarCollapse.collapse.navbar-collapse
@@ -215,7 +216,7 @@ html(lang='en')
             .scrolling-wrapper1
               .row
                 each product in products
-                 .col-4
+                 .col-3
                   a(href="/addcart/#{product.id}").card
                     h5.text-truncate=product.name
             
