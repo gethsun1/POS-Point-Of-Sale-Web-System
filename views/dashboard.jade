@@ -216,7 +216,7 @@ html(lang='en')
                 each product in products
                  .col-4
                   a(href="/addcart/#{product.id}").card
-                    h5=product.name
+                    h5.text-truncate=product.name
             
                  
                   
