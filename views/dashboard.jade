@@ -1,0 +1,262 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+    meta(name='generator', content='Jekyll v3.8.6')
+    title Spare-Shop - Dashboard
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+
+    style.
+      .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      }
+      @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+      }
+      }
+      .badge{
+        color:black;
+        background-color:white
+      }
+      body
+      {
+        background-color:white
+      }
+      .scrolling-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom:10px;
+
+        
+      }
+      .scrolling-wrapper1 {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom:10px;
+        margin-top:5px;
+
+        
+      }
+      .card {
+          flex: 0 0 auto;
+          padding:30px;
+          margin:4px;
+          color:black;
+          text-decoration:none;
+          background-color:whitesmoke;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19)
+        }
+        .scrolling-wrapper1 .card {
+          flex: 0 0 auto;
+          padding:30px;
+          margin:4px;
+          color:white;
+          text-decoration:none;
+          background-color: #212529;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19)
+        }
+        .scrolling-wrapper1 .card:hover {
+          flex: 0 0 auto;
+          padding:30px;
+          margin:4px;
+          color:black;
+          text-decoration:none;
+          background-color: whitesmoke;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19)
+        }
+        .card:hover{
+          flex: 0 0 auto;
+          padding:30px;
+          margin:4px;
+          text-decoration:none;
+          background-color:#212529;
+          color:white;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19)
+        }
+        #finalize
+        {
+          display:none
+        }
+        #user
+        {
+          color:white;margin-left:10px;
+        }
+    // Custom styles for this template
+    link(href='navbar-top.css', rel='stylesheet')
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
+      a.navbar-brand(href='#') Spare-Shop
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarCollapse.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto.navbar-left
+          li.nav-item
+            a.nav-link(href='/dashboard')  Home
+          li.nav-item
+            a.nav-link(href='/inventory')  Inventory
+        ul.navbar-nav.ml-auto.navbar-left
+          if user.role==='Administrator'
+            li.nav-item
+              a.nav-link(href='/manage')  Manage Users
+          
+          li.nav-item
+            a.nav-link(href='/sales') Sales
+          li.nav-item
+            a.nav-link(href='/logout') Logout
+        span#user 
+         i.fa.fa-user 
+         &nbsp;
+         | #{user.firstname} #{user.lastname}
+    main.container-fluid
+  
+      .row
+          
+          .col-5
+            .row
+              .col(style='overflow-y:scroll;height:400px;background-color:whitesmoke;margin-left:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);')
+                table.table
+                  thead
+                   tr
+                    th Name
+                    th Category
+                    th Quantity
+                    th Price
+                    th Actions
+                  tbody
+                   if carts.length < 1
+                     tr
+                    
+                       td(colspan='4',style='text-align:center') No products available
+                      
+                   if carts.length > 0
+                    each cart in carts
+                      tr
+                        td=cart.name
+                        td #{cart.parent} / #{cart.category}
+                        td.text-truncate(style='width:2px')
+                         form(action="/onChange/#{cart.id}", method="post")
+                          input(type="number", name="value",value=cart.unit,min=1,style='width:80%',onChange="form.submit()")
+                        td KES #{cart.price}
+                        td
+                          a(href="/removeCart/#{cart.id}")
+                            i.fa.fa-minus(style='color:red')
+            .row
+              .col(style='margin-top:20px;background-color:whitesmoke;margin-left:10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);')
+                table.table
+                  tbody
+                   tr
+                    td
+                     h4 Subtotal
+                    td
+                     if carts.length <1
+                      h4 KES 0
+                     if carts.length > 0
+                      h4 #{total}
+                
+                   tr
+                    td
+                     h6 Items
+                    td
+                     h6  #{carts.length}
+                if amount >0
+                  input.form-control.form-control-lg#amount(type='number',name='Amount Given',value=amount,placeholder='Amount Given',style='display:none')
+                  input.form-control.form-control-lg#given(type='number',name='Amount Given',placeholder='Amount Given')
+                #finalize
+                  h4(style='text-align:center;margin-top:20px') Customer Change 
+                   span#change
+                  hr
+                  a(href="/confirmCart").btn.btn-success.btn-block.btn-lg(style='margin-top:15px;margin-bottom:15px') Purchase
+                    &nbsp;
+                    i.fa.fa-cart
+
+                if amount>0
+                  a(href="/clearCart").btn.btn-success.btn-danger.btn-block.btn-lg(style='margin-top:15px;margin-bottom:15px') Clear Cart
+                    &nbsp;
+                    i.fa.fa-cart
+                    
+            .row(style='margin-top:30px')
+              .col(style='background-color:white')
+          .col-7
+            .row
+             .col
+              form(action="/search", method="post")
+                input.form-control.form-control-lg(type='search',name='search',placeholder='Search for a product')
+              hr
+            .row
+             .col(style='margin-bottom:10px')
+              i(style='font-weight:bold') Parent Categories:
+              
+            .scrolling-wrapper
+                
+                each parent in parents
+                  a(href="/searchParent/#{parent.name}").card
+                    h5=parent.name
+            .row
+             .col
+               i(style='font-weight:bold;margin-bottom:10px:margin-top:30px') All Products:
+              
+            .scrolling-wrapper1
+              
+                each product in products
+                  a(href="/addcart/#{product.id}").card
+                    h5=product.name
+            
+                 
+                  
+
+               
+             
+            
+
+        
+             
+  
+          
+                
+
+        
+
+    script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
+    script.
+      
+      $(document).ready(function(){
+        $("#given").change(function(){
+           var amount = $( "#amount" ).val();
+          var given = $( "#given" ).val();
+         
+          if(parseFloat(amount)>parseFloat(given))
+          {
+            alert('Failed to Proceed. Given amount is less')
+       
+          }
+          else
+          {
+            $('#finalize').show()
+            var minus = given - amount;
+            const formatter = new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'KES',
+              minimumFractionDigits: 2
+             })
+             document.getElementById('change').innerHTML = formatter.format(minus)
+          }
+        });
+      });
+        
+

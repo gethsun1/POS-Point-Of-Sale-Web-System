@@ -1,0 +1,124 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='Mark Otto, Jacob Thornton, and Bootstrap contributors')
+    meta(name='generator', content='Jekyll v3.8.6')
+    title Spare-Shop - Manage Users
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+
+    style.
+      .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      }
+      @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+      }
+      }
+      .badge{
+        color:black;
+        background-color:white
+      }
+       #user
+        {
+          color:white;margin-left:10px;
+        }
+    // Custom styles for this template
+    link(href='navbar-top.css', rel='stylesheet')
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.mb-4
+      a.navbar-brand(href='#') Spare-Shop
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarCollapse.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/dashboard')  Dashboard
+          li.nav-item
+            a.nav-link(href='/inventory')  Inventory
+        ul.navbar-nav.ml-auto 
+          li.nav-item
+            a.nav-link(href='/manage') Manage Users
+          li.nav-item
+            a.nav-link(href='/sales') Sales
+          li.nav-item
+            a.nav-link(href='/logout') Logout
+        span#user 
+         i.fa.fa-user 
+         &nbsp;
+         | #{user.firstname} #{user.lastname}
+             
+     
+    main.container-fluid(role='main')
+        .row
+         .col-1
+         .col-5
+           .jumbotron
+             table.table
+              thead
+                tr 
+                 th Fullname
+                 th Username
+                 th EmployeeNO
+                 th Role
+                 th Actions
+              tbody
+               each use in users
+                tr
+                 td #{use.firstname} #{use.lastname}
+                 td #{use.username}
+                 td #{use.EmployeeNo}
+                 td #{use.role}
+                 td
+                  a(href="/deleteUser/#{use.id}")
+                   i.fa.fa-minus(style='color:red')
+
+         .col-4
+          .jumbotron
+              .page-header
+                h3 Add a new user
+              hr
+              form(action='/signup2',method='POST')
+                .form-group
+                  label(for='exampleInputProduct') Firstname:
+                  input#exampleInputProduct.form-control.form-control-lg(type='text',  placeholder='Firstname',name='firstname',required)
+                .form-group
+                  label(for='exampleInputQuantity') Lastname:
+                  input#exampleInputQunatity.form-control.form-control-lg(type='text', placeholder='Lastname',name='lastname',required)
+                .form-group
+                  label(for='exampleInputPrice') Username:
+                  input#exampleInputPrice.form-control.form-control-lg(type='text', placeholder='Username',name='username',required)
+                .form-group
+                  label(for='exampleInputPrice') Employee Number:
+                  input#exampleInputPrice.form-control.form-control-lg(type='number', placeholder='Employee Number',name='employee',required)
+                .form-group
+                  label(for='exampleInputPrice') Role:
+                  select.form-control.form-control-lg(name='role')
+                   option Cashier
+                   option Administrator
+                .form-group
+                  label(for='exampleInputPrice') Password:
+                  input#exampleInputPrice.form-control.form-control-lg(type='password', placeholder='Password',name='password',required)
+                .form-group
+                  label(for='exampleInputPrice') Confirm Password:
+                  input#exampleInputPrice.form-control.form-control-lg(type='password', placeholder='Confirm Password',name='password2',required)
+                .form-group
+                  button.btn.btn-primary.btn-lg.btn-block Add
+                   
+                   
+
+         .col-2
+
+    
+    script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
