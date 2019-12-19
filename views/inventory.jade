@@ -211,7 +211,7 @@ html(lang='en')
                     each product in products
                       tr
                           td 
-                          td=product.name
+                          td(style="white-space: nowrap;")=product.name
                           td=product.category
                           td=product.quantityReceived
                           td=product.quantityIssued
