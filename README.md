@@ -5,9 +5,10 @@ Go to the nodejs official website and download nodejs directly.
 Then download mongoDB on the mongoDB official website.
 MongoDB is the database that I have used in this project. Follow the Installation process!
 
-Next-Open your project folder on a command line.
+Open your project folder on a command line.
 
 ---------INSTALLATION----------------
+
 npm install or yarn install
 
 Install also nodemon package which helps in watching any changes one makes on the files and updates it automatically without manually restarting the server
@@ -19,6 +20,8 @@ yarn add nodemon -g
 --------NEXT-----------------
 
 type nodemon on the command line and press enter. Open the project on a browser with the specified port.
+to signup as an admin user add  /signup.
+You can change the route path afterwards
 
 
 ASANTE!
