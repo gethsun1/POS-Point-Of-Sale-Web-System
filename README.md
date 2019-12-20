@@ -20,7 +20,7 @@ yarn add nodemon -g
 --------NEXT-----------------
 
 type nodemon on the command line and press enter. Open the project on a browser with the specified port.
-to signup as an admin user add  /signup.
+To signup as an admin user add  /signup.
 You can change the route path afterwards
 
 
